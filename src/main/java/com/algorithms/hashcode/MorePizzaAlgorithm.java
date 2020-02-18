@@ -11,21 +11,17 @@ public class MorePizzaAlgorithm {
 
     public static void main(String[] args) {
         Map<String, FileInput> pizzaInput = PizzaFileOperation.getPizzaInput();
-        pizzaInput.forEach((filename,fileInput)->{
+        pizzaInput.forEach((filename, fileInput) -> {
             FileOutput fileOutput = getPossibleMaxSlice(fileInput);
             String outputFileName = FilenameUtils.removeExtension(filename);
             PizzaFileOperation.writePizzaOutput(outputFileName, fileOutput);
-
-            System.out.println(fileOutput.getTypeOfPizzaCount());
-            System.out.println(fileOutput.getTypeNoList());
-            System.out.println();
 
         });
 
     }
 
 
-    public static FileOutput getPossibleMaxSlice(FileInput fileInput) {
+    private static FileOutput getPossibleMaxSlice(FileInput fileInput) {
         FileOutput fileOutput = new FileOutput();
         List<Integer> selectedTypeList = new ArrayList<>();
         int maxLimit = fileInput.getMaxSlice();
@@ -40,7 +36,7 @@ public class MorePizzaAlgorithm {
             }
             i--;
         }
-        fileOutput.setTypeOfPizzaCount(sliceCount);
+        fileOutput.setTypeOfPizzaCount(selectedTypeList.size());
         //refactor
         Collections.reverse(selectedTypeList);
         fileOutput.setTypeNoList(selectedTypeList);
